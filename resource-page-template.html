@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{{title}} - Retrores - Windows 98 Resources</title>
+		<link href="styles/layout.css" rel="stylesheet" type="text/css">
+		<link href="styles/look.css" rel="stylesheet" type="text/css">
+		<!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+		<meta name="apple-mobile-web-app-title" content="Retrores">
+		<meta name="application-name" content="Retrores">
+		<!-- <meta name="msapplication-TileColor" content="#2b5797"> -->
+		<!-- <meta name="theme-color" content="#008080"> -->
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+	</head>
+	<body>
+		<h1 class="site-title">Retrores</h1>
+		<!-- <input type="search"> -->
+		<h2>{{title}}</h2>
+		{% files.forEach(function(file){ %}
+			<article class="resource-file">
+				<a href="{{ file.path }}">
+					<h1>{{ file.name }}</h1>
+					<img src="{{ file.path }}">
+				</a>
+			</article>
+		{% }) %}
+	</body>
+</html>

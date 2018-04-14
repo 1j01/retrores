@@ -1,0 +1,40 @@
+{
+	"name": "retrores",
+	"description": "Resources from Windows 98",
+	"version": "0.0.0",
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/1j01/retrores.git"
+	},
+	"bugs": {
+		"url": "http://github.com/1j01/retrores/issues"
+	},
+	"license": "UNLICENSED",
+	"private": true,
+	"keywords": [
+		"windows",
+		"98",
+		"98.js",
+		"windows-98",
+		"operating-system",
+		"os",
+		"resources",
+		"icons",
+		"images",
+		"cursors",
+		"ico",
+		"cur",
+		"ani",
+		"avi",
+		"dll"
+	],
+	"devDependencies": {
+		"live-server": "^1.2.0",
+		"slug": "^0.9.1",
+		"template-js": "^1.0.10"
+	},
+	"scripts": {
+		"start": "live-server",
+		"build": "node build-site.js"
+	}
+}
