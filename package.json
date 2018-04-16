@@ -29,12 +29,22 @@
 		"dll"
 	],
 	"devDependencies": {
+		"concurrently": "^3.5.1",
 		"live-server": "^1.2.0",
+		"npm-watch": "^0.3.0",
 		"slug": "^0.9.1",
 		"template-js": "^1.0.10"
 	},
 	"scripts": {
-		"start": "live-server",
+		"start": "concurrently \"live-server docs\" \"npm-watch build\"",
 		"build": "node build-site.js"
+	},
+	"watch": {
+		"build": {
+		  "patterns": ["", "templates"],
+		  "extensions": "js,jsx,html",
+		  "legacyWatch": true,
+		  "delay": 500
+		}
 	}
 }
