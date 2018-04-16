@@ -14,16 +14,19 @@
 	</head>
 	<body>
 		<h1 class="site-title">Retrores</h1>
-		<!-- <input type="search"> -->
-		<h2>Resource Index</h2>
-		{% resources.forEach(function(resource){ %}
-			<article class="resource">
-				<a href="{{ resource.__htmlPath }}">
-				<!-- TODO: leave off .html -->
-					<h1>{{ resource.title }}</h1>
-					<img src="{{ resource.files[1].path }}">
-				</a>
-			</article>
-		{% }) %}
+		<main>
+			<!-- <input type="search"> -->
+			<h2>Resource Index</h2>
+			{% resources.forEach(function(resource){ %}
+				<article class="resource">
+					<a href="{{ resource.__htmlPath }}">
+					<!-- TODO: leave off .html -->
+						<h1>{{ resource.title }}</h1>
+						<img src="{{ resource.files[1].path }}" />
+					</a>
+				</article>
+			{% }) %}
+		</main>
+		{{ include("templates/footer.html") }}
 	</body>
 </html>

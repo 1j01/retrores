@@ -14,15 +14,18 @@
 	</head>
 	<body>
 		<h1 class="site-title">Retrores</h1>
-		<!-- <input type="search"> -->
-		<h2>{{title}}</h2>
-		{% files.forEach(function(file){ %}
-			<article class="resource-file">
-				<a href="{{ file.path }}">
-					<h1>{{ file.name }}</h1>
-					<img src="{{ file.path }}">
-				</a>
-			</article>
-		{% }) %}
+		<main>
+			<!-- <input type="search"> -->
+			<h2>{{title}}</h2>
+			{% files.forEach(function(file){ %}
+				<article class="resource-file">
+					<a href="{{ file.path }}">
+						<h1>{{ file.name }}</h1>
+						<img src="{{ file.path }}" />
+					</a>
+				</article>
+			{% }) %}
+		</main>
+		{{ include("templates/footer.html") }}
 	</body>
 </html>
