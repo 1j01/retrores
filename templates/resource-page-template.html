@@ -6,18 +6,20 @@
 		{{ include("templates/head-links-and-metas.html") }}
 	</head>
 	<body>
-		<h1 class="site-title"><a href="/">Retrores</a></h1>
-		<main>
-			<!-- <input type="search"> -->
-			<h2>{{title}}</h2>
-			{% files.forEach(function(file){ %}
-				<article class="resource-file">
-					<a href="{{ file.path }}">
-						<h1>{{ file.name }}</h1>
-						<img src="{{ file.path }}" />
-					</a>
-				</article>
-			{% }) %}
+		{{ include("templates/header.html") }}
+		<main class="site-main">
+			<div class="page-width-container">
+				<!-- <input type="search"> -->
+				<h2>{{title}}</h2>
+				{% files.forEach(function(file){ %}
+					<article class="resource-file">
+						<a href="{{ file.path }}">
+							<h1>{{ file.name }}</h1>
+							<img src="{{ file.path }}" />
+						</a>
+					</article>
+				{% }) %}
+			</div>
 		</main>
 		{{ include("templates/footer.html") }}
 	</body>

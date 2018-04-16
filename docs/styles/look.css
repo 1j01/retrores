@@ -3,6 +3,16 @@ body {
 	font-family: sans-serif;
 }
 
+.site-header,
+.site-footer {
+	background: black;
+	color: white;
+}
+.site-header a,
+.site-footer a {
+	color: white;
+	font-weight: bold;
+}
 .site-title {
 	font-size: 3em;
 }
