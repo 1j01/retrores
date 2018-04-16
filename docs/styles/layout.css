@@ -21,3 +21,12 @@ html, body {
 	margin-left: auto;
 	margin-right: auto;
 }
+.logo-image-text {
+	position: absolute;
+	font-family: Courier, monospace; /* font choice here pretty arbitrary but choosing one so that dimensions can be more consistent */
+	/* font-size: 120px;
+	letter-spacing: -17px; */
+	font-size: 93px;
+	text-align: center;
+	color: transparent;
+}

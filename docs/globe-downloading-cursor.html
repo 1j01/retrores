@@ -16,10 +16,20 @@
 		<header class="site-header">
 	<h1 class="site-title">
 		<a href="/">
-			<img src="assets/retrores-green-pink-no-glow.png" alt="Retrores">
+			<span class="logo-image-text">Retrores</span>
+			
+			<img
+				src="assets\retrores-green-pink-no-glow.png"
+				width="450" height="143" style="margin-bottom: 143px" alt=""
+			/>
+			<!-- margin-bottom = room for reflection = height -->
 		</a>
 	</h1>
-</header>
+</header>
+<script src="lib/lake.js"></script>
+<script>
+	lake(document.querySelector(".site-title img"));
+</script>
 		<main class="site-main">
 			<div class="page-width-container">
 				<!-- <input type="search"> -->
