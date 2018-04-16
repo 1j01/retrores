@@ -32,9 +32,9 @@ resources.forEach(function (resource) {
 	// var path_slug = slug(resource.title, {lower: true});
 	// var html_file_path = path_slug + ".html";
 	var html_file_path = resource.__htmlPath;
-	var html_content = new Template("resource-page-template.html", resource);
+	var html_content = new Template("templates/resource-page-template.html", resource);
 	fs.writeFileSync(require("path").join(site_folder, html_file_path), html_content);
 });
 
-var homepage_html = new Template("homepage-template.html", {resources});
+var homepage_html = new Template("templates/homepage-template.html", {resources});
 fs.writeFileSync(require("path").join(site_folder, "index.html"), homepage_html);
