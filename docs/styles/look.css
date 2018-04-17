@@ -1,4 +1,11 @@
 
+:root {
+	--tag-color: bisque; /*or: #ffd38d*/
+	--tag-text-color: black;
+	/* --footer-color: black;
+	--footer-text-color: white; */
+}
+
 body {
 	font-family: sans-serif;
 }
@@ -21,7 +28,8 @@ body {
 	line-height: 2.4em;
 }
 .tag {
-	background: bisque;
+	background: var(--tag-color);
+	color: var(--tag-text-color);
 	box-sizing: border-box;
 	height: 2em;
 	line-height: 2em;
@@ -33,14 +41,13 @@ body {
 	border-top-right-radius: 4px;
 }
 .tag:before {
-	/* background: rebeccapurple; */
 	content: "";
 	position: absolute;
 	top: 0;
 	left: -1em;
 	width: 0;
 	height: 0;
-	border-color: transparent bisque transparent transparent;
+	border-color: transparent var(--tag-color) transparent transparent;
 	border-style: solid;
 	border-width: 1em 1em 1em 0;		
 }
@@ -48,11 +55,11 @@ body {
 .tags-small {
 	font-size: 0.8em;
 }
-.tags:not(.tags-small) .tag {
+.tags-large .tag {
 	/* margin-left: 1.2em; */
 	padding-left: 0.9em;
 }
-.tags:not(.tags-small) .tag:after {
+.tags-large .tag:after {
 	content: "";
 	position: absolute;
 	top: calc(1em - 2px);
