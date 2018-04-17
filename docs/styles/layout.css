@@ -30,3 +30,7 @@ html, body {
 	text-align: center;
 	color: transparent;
 }
+
+.tags li {
+	display: inline-block;
+}

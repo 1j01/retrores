@@ -16,3 +16,40 @@ body {
 .site-title {
 	font-size: 3em;
 }
+
+.tags {
+	line-height: 2.4em;
+}
+.tag {
+	background: bisque;
+	padding: 5px;
+	height: 1.5em;
+	line-height: 1.5em;
+	margin-left: 1.2em;
+	padding-left: 0.9em;
+	padding-right: 0.5em;
+	position: relative;
+}
+.tag:before {
+	font-size: 1.054em; /* XXX */
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -1em;
+	width: 0;
+	height: 0;
+	border-color: transparent bisque transparent transparent;
+	border-style: solid;
+	border-width: 1em 1em 1em 0;		
+}
+.tag:after {
+	content: "";
+	position: absolute;
+	top: calc(1em - 2px);
+	left: 0;
+	width: 4px;
+	height: 4px;
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: -1px -1px 2px #004977;
+}

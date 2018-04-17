@@ -11,6 +11,7 @@
 			<div class="page-width-container">
 				<!-- <input type="search"> -->
 				<h2>{{title}}</h2>
+				<p>{{ description }}</p>
 				{% files.forEach(function(file){ %}
 					<article class="resource-file">
 						<a href="{{ file.path }}">
@@ -19,6 +20,11 @@
 						</a>
 					</article>
 				{% }) %}
+				<ul class="tags">
+					{% tags.forEach(function(tag){ %}
+						<li class="tag">{- tag -}</li>
+					{% }) %}
+				</ul>
 			</div>
 		</main>
 		{{ include("templates/footer.html") }}
