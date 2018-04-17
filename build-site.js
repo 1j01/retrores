@@ -15,7 +15,6 @@ try {
 }
 
 resources.forEach(function (resource) {
-	// console.log(resource);
 	if(!resource.title){
 		throw new TypeError("Resource is missing title! " + JSON.stringify(resource));
 	}
@@ -25,12 +24,6 @@ resources.forEach(function (resource) {
 	resource.__pageLink = resource.__htmlPath;
 });
 resources.forEach(function (resource) {
-	// console.log(resource);
-	// if(!resource.title){
-	// 	throw new TypeError("Resource is missing title! " + JSON.stringify(resource));
-	// }
-	// var path_slug = slug(resource.title, {lower: true});
-	// var html_file_path = path_slug + ".html";
 	var html_file_path = resource.__htmlPath;
 	var html_content = new Template("templates/resource-page-template.html", resource);
 	fs.writeFileSync(require("path").join(site_folder, html_file_path), html_content);
