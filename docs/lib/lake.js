@@ -46,8 +46,7 @@ lake = function(img, options) {
 		// image displacement
 		c.save();
 		while (!end) {
-			// var odd = c.createImageData(dw, dh);
-			var odd = c.getImageData(0, h/2, w, h);
+			var odd = c.createImageData(dw, dh);
 			var od = odd.data;
 			// var pixel = (w*4) * 5;
 			var pixel = 0;
@@ -72,11 +71,21 @@ lake = function(img, options) {
 						od[++pixel] = od[pixel + 4 * sign];
 						od[++pixel] = od[pixel + 4 * sign];
 						od[++pixel] = od[pixel + 4 * sign];
+						// Tune these parameters to get VHS or glitch effects!
+						// if(Math.sin(pixel)<0.3){
 						++pixel;
+						// }else{
+						// 	pixel+=~~(Math.sin(pixel/5000)*20);
+						// }
 						continue;
 					}
 
-					if (id[j+3] != 0) {
+					// What was the idea here? transparent graphics seem to work better with if true...
+					// There was probably some reasoning behind this, but maybe transparency support
+					// just wasn't tested after some point, and changes were made, and it broke? I don't know!
+					// Or maybe they just wanted a different effect for transparency, or something.
+					// if (id[j+3] != 0) {
+					if (true) {
 						od[pixel]   = id[j];
 						od[++pixel] = id[++j];
 						od[++pixel] = id[++j];
