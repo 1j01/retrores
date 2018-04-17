@@ -18,6 +18,12 @@
 							<h1>{{ resource.title }}</h1>
 							<img src="{{ resource.files[1].path }}" />
 						</a>
+						<p>{{ resource.description }}</p>
+						<ul class="tags tags-small">
+							{% resource.tags.forEach(function(tag){ %}
+								<li class="tag">{- tag -}</li>
+							{% }) %}
+						</ul>
 					</article>
 				{% }) %}
 			</div>

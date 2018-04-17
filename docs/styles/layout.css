@@ -31,6 +31,10 @@ html, body {
 	color: transparent;
 }
 
+.tags {
+	list-style: none;
+	padding: 0;
+}
 .tags li {
 	display: inline-block;
 }
