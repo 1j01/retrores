@@ -15,6 +15,14 @@ try {
 	}
 }
 
+var beautify_and_output_html = function(html_content, html_file_path){
+	html_content = beautify_html(html_content, {
+		indent_with_tabs: true,
+		max_preserve_newlines: 0, // we output excessive newlines with our templating, especially in lists
+	});
+	fs.writeFileSync(require("path").join(site_folder, html_file_path), html_content);
+};
+
 resources.forEach(function (resource) {
 	if(!resource.title){
 		throw new TypeError("Resource is missing title! " + JSON.stringify(resource));
@@ -27,10 +35,8 @@ resources.forEach(function (resource) {
 resources.forEach(function (resource) {
 	var html_file_path = resource.__htmlPath;
 	var html_content = new Template("templates/resource-page-template.html", resource).toString();
-	html_content = beautify_html(html_content, {indent_with_tabs: true});
-	fs.writeFileSync(require("path").join(site_folder, html_file_path), html_content);
+	beautify_and_output_html(html_content, html_file_path);
 });
 
 var homepage_html = new Template("templates/homepage-template.html", {resources}).toString();
-homepage_html = beautify_html(homepage_html, {indent_with_tabs: true});
-fs.writeFileSync(require("path").join(site_folder, "index.html"), homepage_html);
+beautify_and_output_html(homepage_html, "index.html");
