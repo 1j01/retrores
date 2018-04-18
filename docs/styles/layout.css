@@ -21,6 +21,10 @@ html, body {
 	margin-left: auto;
 	margin-right: auto;
 }
+.site-title canvas,
+.site-title img {
+	max-width: 100%;
+}
 .logo-image-text {
 	position: absolute;
 	font-family: Courier, monospace; /* font choice here pretty arbitrary but choosing one so that dimensions can be more consistent */

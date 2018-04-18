@@ -24,13 +24,13 @@ lake = function(img, options) {
 	var prerender_animation = function() {
 		c.save();
 
-		c.canvas.width  = img.width;
-		c.canvas.height = img.height*2;
+		c.canvas.width  = img.naturalWidth;
+		c.canvas.height = img.naturalHeight*2;
 
 		c.drawImage(img, 0,  0);
 
 		c.scale(1, -1);
-		c.drawImage(img, 0,  -img.height*2);
+		c.drawImage(img, 0,  -img.naturalHeight*2);
 
 		c.restore();
 
