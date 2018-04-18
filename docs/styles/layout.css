@@ -33,6 +33,9 @@ html, body {
 	font-size: 93px;
 	text-align: center;
 	color: transparent;
+	max-width: 100%;
+	overflow: hidden;
+	/* TODO: could scale down the font size with vw and a media query, but I don't see much point in it */
 }
 
 .tags {
