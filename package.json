@@ -41,10 +41,14 @@
 	},
 	"watch": {
 		"build": {
-		  "patterns": ["", "templates"],
-		  "extensions": "js,jsx,html",
-		  "legacyWatch": true,
-		  "delay": 500
+			"patterns": [
+				".",
+				"templates"
+			],
+			"extensions": "js,jsx,html",
+			"ignore": "docs/",
+			"legacyWatch": true,
+			"delay": 500
 		}
 	}
 }
