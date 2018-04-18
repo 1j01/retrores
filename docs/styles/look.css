@@ -25,48 +25,66 @@ body {
 }
 
 .tags {
-	line-height: 2.4em;
+	/* line-height: 2.4em; */
+	/* --half-tag-height: 1em; */
+	--tag-height: calc(var(--half-tag-height) * 2);
+	--tag-spacing: 0.1em; /* in addition to whitespace in html */
 }
 .tag {
 	background: var(--tag-color);
 	color: var(--tag-text-color);
 	box-sizing: border-box;
-	height: 2em;
-	line-height: 2em;
-	margin-left: 1.2em;
+	height: var(--tag-height);
+	line-height: var(--tag-height);
+	margin-left: var(--half-tag-height); /* room for the triangle */
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 	position: relative;
 	border-bottom-right-radius: 4px;
 	border-top-right-radius: 4px;
 }
+.tag ~ .tag {
+	margin-left: calc(var(--half-tag-height) + var(--tag-spacing)); /* room for the triangle plus space between tags */
+}
 .tag:before {
 	content: "";
 	position: absolute;
 	top: 0;
-	left: -1em;
+	left: calc(-1 * var(--half-tag-height));
 	width: 0;
 	height: 0;
 	border-color: transparent var(--tag-color) transparent transparent;
 	border-style: solid;
-	border-width: 1em 1em 1em 0;		
+	border-width: var(--half-tag-height) var(--half-tag-height) var(--half-tag-height) 0;
+	box-shadow: 2px 0 0 var(--tag-color); /* avoid seams at fractional zoom levels! */
 }
 /* TODO: either have large be the default and override all relevent props with .tags-small or visa-versa with .tags-large */
 .tags-small {
 	font-size: 0.8em;
+	line-height: 2.4em;
+	--half-tag-height: 12px;
+}
+.tags-large {
+	line-height: 2.8em;
+	--half-tag-height: 18px;
+}
+.tags-small .tag {
+	/* margin-left: 1.2em; */
+	padding-left: 2px; /* width (x offset) of box-shadow on .tag:before (ideally the shadow would go behind - or the seam wouldn't be an issue in the first place!) */
 }
 .tags-large .tag {
 	/* margin-left: 1.2em; */
 	padding-left: 0.9em;
 }
 .tags-large .tag:after {
+	--circle-radius: 2px;
 	content: "";
 	position: absolute;
-	top: calc(1em - 2px);
+	top: calc(var(--half-tag-height) - var(--circle-radius));
 	left: 0;
-	width: 4px;
-	height: 4px;
-	border-radius: 2px;
+	width: calc(2 * var(--circle-radius));
+	height: calc(2 * var(--circle-radius));
+	border-radius: var(--circle-radius);
 	background: #fff;
 	box-shadow: -1px -1px 2px #004977;
 }
