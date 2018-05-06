@@ -1,9 +1,9 @@
-# [![Retrores](docs/assets/retrores-green-pink-glowy.png)](https://retrores.isaiahodhner.ml/)
+# [![Retrores](docs/assets/retrores-green-pink-glowy.png)](https://retrores.ml/)
 A catalog of cursors and icons from Windows 98, in original and modern formats
 
 There are 3 items in the catalog so far. Humble beginnings :)
 
-[View it here](https://retrores.isaiahodhner.ml/)
+[View it here](https://retrores.ml/)
 
 ## Planned
 
