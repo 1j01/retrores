@@ -1,9 +1,9 @@
-# [![Retrores](docs/assets/retrores-green-pink-glowy.png)](https://retrores.ml/)
+# [![Retrores](docs/assets/retrores-green-pink-glowy.png)](https://retrores.fairuse.org/)
 A catalog of cursors and icons from Windows 98, in original and modern formats
 
 There are 3 items in the catalog so far. Humble beginnings :)
 
-[View it here](https://retrores.ml/)
+[View it here](https://retrores.fairuse.org/)
 
 ## Planned
 
@@ -15,5 +15,6 @@ There are 3 items in the catalog so far. Humble beginnings :)
 	"Hourglass Hour Glass Sands of Time Waiting Loading Busy Timer Please Wait Progress Standby Stand By")
 	* Preview cursors as cursors
 	* Download files or copy base64 data URI
+* Host resources on the distributed web with content addressable protocol(s) like Dat, IPFS, and/or WebTorrent
 
 TODO: automate extraction and conversion to various formats
