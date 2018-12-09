@@ -37,9 +37,9 @@
 		"template-js": "^1.0.10"
 	},
 	"scripts": {
-		"dev": "next",
+		"dev": "node server.js",
 		"build": "next build",
-		"start": "next start",
+		"start": "NODE_ENV=production node server.js",
 		"export": "next export"
 	},
 	"watch": {

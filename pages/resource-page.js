@@ -16,16 +16,16 @@ export default (props) =>
 				<div class="page-width-container">
 					<h2>{ props.title }</h2>
 					<p>{ props.description }</p>
-					{props.files.map((file)=>
+					{ props.files.map((file)=>
 						<article class="resource-file">
-							<a href="{ file.path }">
+							<a href={ file.path }>
 								<h1>{ file.name }</h1>
-								<img src="{ file.path }" />
+								<img src={ file.path } />
 							</a>
 						</article>
-					) 
+					) }
 					<ul class="tags tags-large">
-						{tags.map((tag)=>
+						{ tags.map((tag)=>
 							<li class="tag">{ tag }</li>
 						) }
 					</ul>
