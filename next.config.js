@@ -2,6 +2,7 @@ const withPreact = require('@zeit/next-preact')
 const resources = require('./catalog.js')
 
 module.exports = withPreact({
+	// This is NOT only used during export
 	exportPathMap: ()=> {
 		const pathMap = {
 			'/': { page: '/' }
