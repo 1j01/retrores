@@ -37,8 +37,10 @@
 		"template-js": "^1.0.10"
 	},
 	"scripts": {
-		"start": "concurrently \"live-server docs\" \"npm-watch build\"",
-		"build": "node build-site.js"
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
+		"export": "next export"
 	},
 	"watch": {
 		"build": {
@@ -51,5 +53,13 @@
 			"legacyWatch": true,
 			"delay": 500
 		}
+	},
+	"dependencies": {
+		"@zeit/next-preact": "0.1.0",
+		"next": "7.0.2",
+		"preact": "8.4.2",
+		"preact-compat": "3.18.4",
+		"react": "16.6.3",
+		"react-dom": "16.6.3"
 	}
 }

@@ -1,4 +1,6 @@
-module.exports = [
+import slug from 'slug'
+
+const resources = [
 	{
 		type: "Animated Cursor",
 		embeddedTitle: "Hour Glass",
@@ -34,14 +36,14 @@ module.exports = [
 		files: [
 			{
 				name: "HOURGLAS.ANI",
-				path: "resources/cursors/ani/HOURGLAS.ANI",
+				path: "/static/resources/cursors/ani/HOURGLAS.ANI",
 				type: "ani",
 				// bytes: "?",
 				// frames: "?"
 			},
 			{
 				name: "HOURGLAS.GIF",
-				path: "resources/cursors/gif/HOURGLAS.GIF",
+				path: "/static/resources/cursors/gif/HOURGLAS.GIF",
 				type: "gif",
 				// bytes: "?",
 				// frames: "?"
@@ -85,14 +87,14 @@ module.exports = [
 		files: [
 			{
 				name: "APPSTART.ANI",
-				path: "resources/cursors/ani/APPSTART.ANI",
+				path: "/static/resources/cursors/ani/APPSTART.ANI",
 				type: "ani",
 				// bytes: "?",
 				// frames: "?"
 			},
 			{
 				name: "APPSTART.GIF",
-				path: "resources/cursors/gif/APPSTART.GIF",
+				path: "/static/resources/cursors/gif/APPSTART.GIF",
 				type: "gif",
 				// bytes: "?",
 				// frames: "?"
@@ -137,18 +139,27 @@ module.exports = [
 		files: [
 			{
 				name: "GLOBE.ANI",
-				path: "resources/cursors/ani/GLOBE.ANI",
+				path: "/static/resources/cursors/ani/GLOBE.ANI",
 				type: "ani",
 				// bytes: "?",
 				// frames: "?"
 			},
 			{
 				name: "GLOBE.GIF",
-				path: "resources/cursors/gif/GLOBE.GIF",
+				path: "/static/resources/cursors/gif/GLOBE.GIF",
 				type: "gif",
 				// bytes: "?",
 				// frames: "?"
 			}
 		]
 	},
-];
+]
+
+resources.forEach(function (resource) {
+	if(!resource.title){
+		throw new TypeError("Resource is missing title! " + JSON.stringify(resource))
+	}
+	resource.pagePath = slug(resource.title, {lower: true})
+})
+
+export default resources
