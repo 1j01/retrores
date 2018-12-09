@@ -34,18 +34,6 @@
 		"start": "NODE_ENV=production node server.js",
 		"export": "next export"
 	},
-	"watch": {
-		"build": {
-			"patterns": [
-				".",
-				"templates"
-			],
-			"extensions": "js,jsx,html",
-			"ignore": "docs/",
-			"legacyWatch": true,
-			"delay": 500
-		}
-	},
 	"dependencies": {
 		"@zeit/next-preact": "0.1.0",
 		"express": "4.16.4",
