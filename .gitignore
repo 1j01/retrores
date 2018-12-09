@@ -1,5 +1,6 @@
 
-.next
+out/
+.next/
 
 node_modules/
 
