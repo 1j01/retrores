@@ -1,4 +1,4 @@
-import slug from 'slug'
+const slug = require('slug')
 
 const resources = [
 	{
@@ -159,7 +159,9 @@ resources.forEach(function (resource) {
 	if(!resource.title){
 		throw new TypeError("Resource is missing title! " + JSON.stringify(resource))
 	}
-	resource.pagePath = slug(resource.title, {lower: true})
+	resource.pagePathSlug = slug(resource.title, {lower: true})
+	resource.pagePath = '/' + resource.pagePathSlug
+	resource.id = resource.pagePathSlug
 })
 
-export default resources
+module.exports = resources

@@ -1,39 +1,47 @@
+import {withRouter} from 'next/router'
 import Head from 'next/head'
 import SharedHeadStuff from '../components/SharedHeadStuff.js'
 import Header from '../components/Header.js'
 import Footer from '../components/Footer.js'
 import resources from '../catalog.js'
 
-export default (props) =>
-	<html>
-		<Head>
-			<title>{ props.title } - Retrores - Windows 98 Resources</title>
-		</Head>
-		<SharedHeadStuff/>
-		<body>
-			<Header/>
-			<main class="site-main">
-				<div class="page-width-container">
-					<h2>{ props.title }</h2>
-					<p>{ props.description }</p>
-					{ props.files.map((file)=>
-						<article class="resource-file">
-							<a href={ file.path }>
-								<h1>{ file.name }</h1>
-								<img src={ file.path } />
-							</a>
-						</article>
-					) }
-					<ul class="tags tags-large">
-						{ tags.map((tag)=>
-							<li class="tag">{ tag }</li>
+const getResourceById = (id)=>
+	resources.find((resource)=> resource.id === id)
+
+export default withRouter((props) => {
+	const resource = getResourceById(props.router.query.id);
+	return (
+		<html>
+			<Head>
+				<title>{ resource.title } - Retrores - Windows 98 Resources</title>
+			</Head>
+			<SharedHeadStuff/>
+			<body>
+				<Header/>
+				<main className="site-main">
+					<div className="page-width-container">
+						<h2>{ resource.title }</h2>
+						<p>{ resource.description }</p>
+						{ resource.files.map((file)=>
+							<article className="resource-file">
+								<a href={ file.path }>
+									<h1>{ file.name }</h1>
+									<img src={ file.path } />
+								</a>
+							</article>
 						) }
-					</ul>
-					<nav class="return">
-						<a href="/" class="chevron left">Return to Resource Index</a>
-					</nav>
-				</div>
-			</main>
-			<Footer/>
-		</body>
-	</html>
+						<ul className="tags tags-large">
+							{ resource.tags.map((tag)=>
+								<li className="tag">{ tag }</li>
+							) }
+						</ul>
+						<nav className="return">
+							<a href="/" className="chevron left">Return to Resource Index</a>
+						</nav>
+					</div>
+				</main>
+				<Footer/>
+			</body>
+		</html>
+	)
+})
