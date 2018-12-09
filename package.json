@@ -28,14 +28,6 @@
 		"avi",
 		"dll"
 	],
-	"devDependencies": {
-		"concurrently": "^3.5.1",
-		"js-beautify": "^1.7.5",
-		"live-server": "^1.2.0",
-		"npm-watch": "^0.3.0",
-		"slug": "^0.9.1",
-		"template-js": "^1.0.10"
-	},
 	"scripts": {
 		"dev": "node server.js",
 		"build": "next build",
@@ -56,10 +48,12 @@
 	},
 	"dependencies": {
 		"@zeit/next-preact": "0.1.0",
+		"express": "4.16.4",
 		"next": "7.0.2",
 		"preact": "8.4.2",
 		"preact-compat": "3.18.4",
 		"react": "16.6.3",
-		"react-dom": "16.6.3"
+		"react-dom": "16.6.3",
+		"slug": "0.9.2"
 	}
 }
