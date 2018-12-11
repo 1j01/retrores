@@ -160,7 +160,7 @@ resources.forEach(function (resource) {
 		throw new TypeError("Resource is missing title! " + JSON.stringify(resource))
 	}
 	resource.pagePathSlug = slug(resource.title, {lower: true})
-	resource.pagePath = '/' + resource.pagePathSlug
+	resource.pagePath = '/' + resource.pagePathSlug + '/'
 	resource.id = resource.pagePathSlug
 })
 
