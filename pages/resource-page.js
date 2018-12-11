@@ -1,4 +1,5 @@
 import {withRouter} from 'next/router'
+import Link from 'next/link'
 import Head from 'next/head'
 import SharedHeadStuff from '../components/SharedHeadStuff.js'
 import Header from '../components/Header.js'
@@ -36,7 +37,9 @@ export default withRouter((props) => {
 							) }
 						</ul>
 						<nav className="return">
-							<a href="/" className="chevron left">Return to Resource Index</a>
+							<Link href="/">
+								<a href="/" className="chevron left">Return to Resource Index</a>
+							</Link>
 						</nav>
 					</div>
 				</main>

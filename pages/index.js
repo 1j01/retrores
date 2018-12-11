@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Head from 'next/head'
 import SharedHeadStuff from '../components/SharedHeadStuff.js'
 import Header from '../components/Header.js'
@@ -17,10 +18,12 @@ export default () =>
 					<h2>Resource Index</h2>
 					{resources.map((resource)=>
 						<article class="resource">
-							<a href={ resource.pagePath }>
-								<h1>{ resource.title }</h1>
-								<img src={ resource.files[1].path } />
-							</a>
+							<Link href={`/resource-page?id=${encodeURIComponent(resource.id)}`} as={ resource.pagePath }>
+								<a href={ resource.pagePath }>
+									<h1>{ resource.title }</h1>
+									<img src={ resource.files[1].path } />
+								</a>
+							</Link>
 							<p>{ resource.description }</p>
 							<ul class="tags tags-small">
 								{resource.tags.map((tag)=>
