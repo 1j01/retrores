@@ -1,0 +1,5 @@
+redirects = [
+	{from = "/hour-glass-cursor.html", to = "/hour-glass-cursor"},
+	{from = "/hour-glass-arrow-cursor.html", to = "/hour-glass-arrow-cursor"},
+	{from = "/globe-downloading-cursor.html", to = "/globe-downloading-cursor"},
+]
