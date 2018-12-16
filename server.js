@@ -2,6 +2,7 @@ require('@zeit/next-preact/alias')()
 const { createServer } = require('http')
 const next = require('next')
 const resources = require('./catalog.js')
+// TODO: hot-reload resources list?
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000
