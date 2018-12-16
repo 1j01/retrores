@@ -3,6 +3,7 @@ const path = require('path');
 const readline = require('readline');
 const {spawn} = require('child_process');
 const mkdirp = require('mkdirp');
+const dir = require('node-dir');
 const mapLimit = require('async/mapLimit');
 
 // Some things to exclude, if this were part of the automation:
@@ -90,84 +91,55 @@ const deleteDirectorySync = (directoryPath)=> {
 	}
 };
 
-const getDirectoryStructureSync = (directoryPath) => {
-	const entries = [];
-	const entryNames = fs.readdirSync(directoryPath);
-	for (const entryName of entryNames) {
-		const entryPath = path.join(directoryPath, entryName);
-		const stats = fs.statSync(entryPath);
-		if (stats.isDirectory()) {
-			entries.push({
-				path: entryPath,
-				entries: getDirectoryStructureSync(entryPath),
-			});
-		} else {
-			entries.push({
-				path: entryPath,
-			});
-		}
-	}
-	return entries;
-};
+const extractResourcesToCorrespondingDirectoryStructure = (sourceRootPath, destinationRootPath)=> {
+	console.log(`Extracting resources from: ${sourceRootPath}`);
 
-const extractResourcesToCorrespondingDirectoryStructure = (sourceFolderPath, destinationFolderPath)=> {
+	dir.paths(sourceRootPath, (err, paths)=> {
+		if (err) { throw err; }
+		console.log('files:\n',paths.files);
+		console.log('subdirs:\n', paths.dirs);
+		const directoryPaths = [sourceRootPath].concat(paths.dirs);
 
-	const entries = getDirectoryStructureSync(sourceFolderPath)
-	// console.log(entries);
-	const findDirectories = (entries)=> {
-		let directories = [];
-		for (const entry of entries) {
-			if (entry.entries) { // if entry is a directory
-				directories.push(entry);
-				directories = directories.concat(findDirectories(entry.entries));
-			}
-		}
-		return directories;
-	};
-	const directories = findDirectories(entries);
-	// console.log(directories);
-
-	mapLimit(directories, 1,
-		(directory, callback)=> {
-			const sharedPath = path.relative(sourceFolderPath, directory.path);
-			const correspondingDestinationDirectoryPath = path.join(destinationFolderPath, sharedPath);
-			mkdirp.sync(correspondingDestinationDirectoryPath);
-			resourcesExtract(directory.path, correspondingDestinationDirectoryPath, (err)=> {
-				if (err) { return callback(err); }
-				fs.readdir(correspondingDestinationDirectoryPath, (err, fnames)=> {
+		mapLimit(directoryPaths, 1,
+			(directoryPath, callback)=> {
+				const sharedPath = path.relative(sourceRootPath, directoryPath);
+				const correspondingDestinationDirectoryPath = path.join(destinationRootPath, sharedPath);
+				mkdirp.sync(correspondingDestinationDirectoryPath);
+				resourcesExtract(directoryPath, correspondingDestinationDirectoryPath, (err)=> {
 					if (err) { return callback(err); }
-					// resultantResourceFnames = fnames;
-					console.log("Created", fnames);
-					setTimeout(()=> {
-						callback(null, fnames);
-					}, 1000);
+					fs.readdir(correspondingDestinationDirectoryPath, (err, fnames)=> {
+						if (err) { return callback(err); }
+						// resultantResourceFnames = fnames;
+						console.log("Created", fnames);
+						setTimeout(()=> {
+							callback(null, fnames);
+						}, 1000);
+					});
 				});
-			});
-		},
-		(err, results)=> {
-			if (err) {
-				console.error(err);
-			} else {
-				console.log("DONE with all resource extraction!");
-				console.log(entries);
+			},
+			(err, results)=> {
+				if (err) {
+					console.error(err);
+				} else {
+					console.log("DONE with all resource extraction!");
+					console.log(entries);
+				}
 			}
-		}
-	);
+		);
+	});
 };
 
-const sourceFolderPath = process.argv[2];
-if(!sourceFolderPath){
+const sourceRootPath = process.argv[2];
+if(!sourceRootPath){
 	console.error("Usage: node extract-resources.js <top level source folder path>");
 	process.exit(1);
 }
-const destinationFolderPath = path.join(__dirname, "temp/extracted");
+const destinationRootPath = path.join(__dirname, "temp/extracted");
 
-if(fs.existsSync(destinationFolderPath)){
-	console.log(`Deleting old folder: ${destinationFolderPath}`);
-	deleteDirectorySync(destinationFolderPath);
+if(fs.existsSync(destinationRootPath)){
+	console.log(`Deleting old folder: ${destinationRootPath}`);
+	deleteDirectorySync(destinationRootPath);
 }
 
-console.log(`Extracting resources from: ${sourceFolderPath}`);
-
-extractResourcesToCorrespondingDirectoryStructure(sourceFolderPath, destinationFolderPath);
+extractResourcesToCorrespondingDirectoryStructure(sourceRootPath, destinationRootPath);
 

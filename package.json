@@ -39,6 +39,7 @@
 		"async": "2.6.1",
 		"mkdirp": "0.5.1",
 		"next": "7.0.2",
+		"node-dir": "0.1.17",
 		"preact": "8.4.2",
 		"preact-compat": "3.18.4",
 		"react": "16.6.3",
