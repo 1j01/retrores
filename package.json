@@ -43,7 +43,6 @@
 		"preact-compat": "3.18.4",
 		"react": "16.6.3",
 		"react-dom": "16.6.3",
-		"recursive-readdir": "2.2.2",
 		"slug": "0.9.2"
 	}
 }

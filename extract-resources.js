@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 const {spawn} = require('child_process');
-const recursiveReadDir = require('recursive-readdir');
 const mkdirp = require('mkdirp');
 const mapLimit = require('async/mapLimit');
 
@@ -14,6 +13,7 @@ const mapLimit = require('async/mapLimit');
 // - C:/Windows/Downloaded Program Files/
 // - C:/Windows/Cookies/
 // - C:/Windows/TEMP/
+// - C:/Windows/System/CatRoot/
 // - anything related to VMware
 
 const pathToResourcesExtract = "resourcesextract-x64/ResourcesExtract.exe";
@@ -76,15 +76,30 @@ const resourcesExtract = (sourceFolderPath, destinationFolderPath, callback)=> {
 	});
 };
 
-const getDirectoryStructureSync = (dir, entries = []) => {
-	const entryNames = fs.readdirSync(dir);
+const deleteDirectorySync = (directoryPath)=> {
+	if (fs.existsSync(directoryPath)) {
+		for (const entryName of fs.readdirSync(directoryPath)) {
+			const entryPath = path.join(directoryPath, entryName);
+			if (fs.lstatSync(entryPath).isDirectory()) {
+				deleteDirectorySync(entryPath);
+			} else {
+				fs.unlinkSync(entryPath);
+			}
+		}
+		fs.rmdirSync(directoryPath);
+	}
+};
+
+const getDirectoryStructureSync = (directoryPath) => {
+	const entries = [];
+	const entryNames = fs.readdirSync(directoryPath);
 	for (const entryName of entryNames) {
-		const entryPath = path.join(dir, entryName);
-		const entryStats = fs.statSync(entryPath);
-		if (entryStats.isDirectory()) {
+		const entryPath = path.join(directoryPath, entryName);
+		const stats = fs.statSync(entryPath);
+		if (stats.isDirectory()) {
 			entries.push({
 				path: entryPath,
-				entries: getDirectoryStructureSync(entryPath, dir.entries),
+				entries: getDirectoryStructureSync(entryPath),
 			});
 		} else {
 			entries.push({
@@ -96,8 +111,7 @@ const getDirectoryStructureSync = (dir, entries = []) => {
 };
 
 const extractResourcesToCorrespondingDirectoryStructure = (sourceFolderPath, destinationFolderPath)=> {
-	// mkdirp.sync(destinationFolderPath);
-	
+
 	const entries = getDirectoryStructureSync(sourceFolderPath)
 	// console.log(entries);
 	const findDirectories = (entries)=> {
@@ -113,12 +127,6 @@ const extractResourcesToCorrespondingDirectoryStructure = (sourceFolderPath, des
 	const directories = findDirectories(entries);
 	// console.log(directories);
 
-	// for (const directory of directories) {
-	// 	const sharedPath = path.relative(sourceFolderPath, directory.path);
-	// 	const correspondingDestinationDirectoryPath = path.join(destinationFolderPath, sharedPath);
-	// 	mkdirp.sync(correspondingDestinationDirectoryPath);
-	// 	//dangerous... resourcesExtract(directory.path, correspondingDestinationDirectoryPath);
-	// }
 	mapLimit(directories, 1,
 		(directory, callback)=> {
 			const sharedPath = path.relative(sourceFolderPath, directory.path);
@@ -147,22 +155,19 @@ const extractResourcesToCorrespondingDirectoryStructure = (sourceFolderPath, des
 	);
 };
 
-// const rl = readline.createInterface({
-// 	input: process.stdin,
-// 	output: process.stdout,
-// });
-
-// rl.question('Paste the path to the top level folder to extract from: ', (sourceFolderPath) => {
-// 	rl.close();
 const sourceFolderPath = process.argv[2];
 if(!sourceFolderPath){
 	console.error("Usage: node extract-resources.js <top level source folder path>");
 	process.exit(1);
 }
+const destinationFolderPath = path.join(__dirname, "temp/extracted");
+
+if(fs.existsSync(destinationFolderPath)){
+	console.log(`Deleting old folder: ${destinationFolderPath}`);
+	deleteDirectorySync(destinationFolderPath);
+}
 
 console.log(`Extracting resources from: ${sourceFolderPath}`);
 
-const destinationFolderPath = path.join(__dirname, "temp/extracted");
 extractResourcesToCorrespondingDirectoryStructure(sourceFolderPath, destinationFolderPath);
 
-// });
