@@ -1,5 +1,14 @@
 const slug = require('slug')
 
+const Windows98SE = {
+	shortName: "Windows 98",
+	mediumShortName: "Windows 98 SE",
+	name: "Windows 98 Second Edition (OEM Full)",
+	downloadPage: "https://winworldpc.com/download/417d71c2-ae18-c39a-11c3-a4e284a2c3a5",
+	vmwareInstallationInstructionsPage: "https://www.vmware.com/support/ws3/doc/ws32_guestos9.html",
+	aProductKey: "RW9MG-QR4G3-2WRR9-TG7BH-33GXB",
+}
+
 const resources = [
 	{
 		type: "Animated Cursor",

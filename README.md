@@ -1,14 +1,12 @@
 # [![Retrores](static/logo/retrores-green-pink-glowy.png)](https://retrores.fairuse.org/)
-A catalog of cursors and icons from Windows 98, in original and modern formats
 
-There are 3 items in the catalog so far. Humble beginnings :)
+A catalog of cursors and icons from Windows 98, in original and modern formats
 
 [View it here](https://retrores.fairuse.org/)
 
 ## Planned
 
-* Tons and tons of resources
-	* Automate extraction and conversion to various formats
+* Automate conversion to various formats
 * JSON metadata, which could be considered an API
 	* Rich information like what DLL or EXE a file came from and the index within that source file, the operating system version it was retrieved from, copyright, etc.
 * An interface for browsing icons and cursors on the web

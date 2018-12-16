@@ -1,7 +1,12 @@
 
+# For resource extraction
+temp/
+
+# Next.js
 out/
 .next/
 
+# Node.js
 node_modules/
 
 # Logs
