@@ -5,6 +5,8 @@
 *.cur filter=lfs diff=lfs merge=lfs -text
 *.ani filter=lfs diff=lfs merge=lfs -text
 *.avi filter=lfs diff=lfs merge=lfs -text
+*.exe filter=lfs diff=lfs merge=lfs -text
+*.chm filter=lfs diff=lfs merge=lfs -text
 *.PNG filter=lfs diff=lfs merge=lfs -text
 *.GIF filter=lfs diff=lfs merge=lfs -text
 *.BMP filter=lfs diff=lfs merge=lfs -text
@@ -12,3 +14,5 @@
 *.CUR filter=lfs diff=lfs merge=lfs -text
 *.ANI filter=lfs diff=lfs merge=lfs -text
 *.AVI filter=lfs diff=lfs merge=lfs -text
+*.EXE filter=lfs diff=lfs merge=lfs -text
+*.CHM filter=lfs diff=lfs merge=lfs -text
