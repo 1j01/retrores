@@ -94,26 +94,45 @@ const deleteDirectorySync = (directoryPath)=> {
 const extractResourcesToCorrespondingDirectoryStructure = (sourceRootPath, destinationRootPath)=> {
 	console.log(`Extracting resources from: ${sourceRootPath}`);
 
-	dir.paths(sourceRootPath, (err, paths)=> {
+	dir.subdirs(sourceRootPath, (err, sourceSubDirectoryPaths)=> {
 		if (err) { throw err; }
-		console.log('files:\n',paths.files);
-		console.log('subdirs:\n', paths.dirs);
-		const directoryPaths = [sourceRootPath].concat(paths.dirs);
+		const sourceDirectoryPaths = [sourceRootPath].concat(sourceSubDirectoryPaths);
 
-		mapLimit(directoryPaths, 1,
-			(directoryPath, callback)=> {
-				const sharedPath = path.relative(sourceRootPath, directoryPath);
-				const correspondingDestinationDirectoryPath = path.join(destinationRootPath, sharedPath);
-				mkdirp.sync(correspondingDestinationDirectoryPath);
-				resourcesExtract(directoryPath, correspondingDestinationDirectoryPath, (err)=> {
+		mapLimit(sourceDirectoryPaths, 1,
+			(sourceDirectoryPath, callback)=> {
+				const sharedPath = path.relative(sourceRootPath, sourceDirectoryPath);
+				const destinationDirectoryPath = path.join(destinationRootPath, sharedPath);
+				mkdirp.sync(destinationDirectoryPath);
+				resourcesExtract(sourceDirectoryPath, destinationDirectoryPath, (err)=> {
 					if (err) { return callback(err); }
-					fs.readdir(correspondingDestinationDirectoryPath, (err, fnames)=> {
+					fs.readdir(sourceDirectoryPath, (err, sourceFnames)=> {
 						if (err) { return callback(err); }
-						// resultantResourceFnames = fnames;
-						console.log("Created", fnames);
-						setTimeout(()=> {
-							callback(null, fnames);
-						}, 1000);
+						fs.readdir(destinationDirectoryPath, (err, destinationFnames)=> {
+							if (err) { return callback(err); }
+							// resultantResourceFnames = fnames;
+							// may include directories; i'm assuming they won't match for now
+							const subresources = destinationFnames.map((destinationFname)=> {
+								const subresourcePath = path.join(destinationDirectoryPath, destinationFname);
+								const fromSuperResourceName = destinationFname.replace(/_.*/, "");
+								const fromSuperResourceFileName = sourceFnames.find(
+									(sourceFname)=> sourceFname.indexOf(fromSuperResourceName) === 0
+								);
+								const fromSuperResourcePath = path.join(sourceDirectoryPath, fromSuperResourceFileName);
+								const subResourceID = destinationFname.replace(/[^_]*_/, "").replace(/\..+/, ""); // can be an index number or ID_APP etc.
+								return {
+									fileName: destinationFname,
+									path: subresourcePath,
+									fromSuperResourceName,
+									fromSuperResourceFileName,
+									fromSuperResourcePath,
+									subResourceID,
+								};
+							});
+							console.log("Extracted subresources:", subresources);
+							setTimeout(()=> {
+								callback(null, subresources);
+							}, 1000);
+						});
 					});
 				});
 			},
@@ -122,7 +141,8 @@ const extractResourcesToCorrespondingDirectoryStructure = (sourceRootPath, desti
 					console.error(err);
 				} else {
 					console.log("DONE with all resource extraction!");
-					console.log(entries);
+					console.log(results);
+					console.log("DONE with all resource extraction! see above for results");
 				}
 			}
 		);
