@@ -143,6 +143,7 @@ const extractResourcesToCorrespondingDirectoryStructure = (sourceRootPath, desti
 					console.log("DONE with all resource extraction!");
 					console.log(results);
 					console.log("DONE with all resource extraction! see above for results");
+					fs.writeFileSync("temp/catalog.json", JSON.stringify(results), "utf8");
 				}
 			}
 		);
