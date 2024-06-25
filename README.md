@@ -1,9 +1,9 @@
-# [![Retrores](static/logo/retrores-green-pink-glowy.png)](https://retrores.fairuse.org/)
+# ![Retrores](static/logo/retrores-green-pink-glowy.png)
 A catalog of cursors and icons from Windows 98, in original and modern formats
 
 There are 3 items in the catalog so far. Humble beginnings :)
 
-[View it here](https://retrores.fairuse.org/)
+The site is not currently hosted anywhere. You can run it locally with the instructions below, but it's surely not useful yet!
 
 ## Planned
 
@@ -31,4 +31,4 @@ The site is built with [Next.js](https://nextjs.org/), which gives us hot module
 
 Run `npm run dev` to start the development server, and open `http://localhost:3000` in your browser.
 
-Run `npm run build` to build and export a static site to `out/` - this is what's deployed to [Netlify](https://www.netlify.com/).
+Run `npm run build` to build and export a static site to `out/` - this is what would be deployed to a static hosting provider.
